@@ -4,12 +4,12 @@
       <div
         class="column is-8"
         role="form"
-        aria-label="Formulario para criacao de uma nova tarefa"
+        aria-label="Formulário para criação de uma nova tarefa"
       >
         <input
           type="text"
           class="input"
-          placeholder="Quala tarefa voce deseja inciar?"
+          placeholder="Qual tarefa você deseja iniciar?"
         />
       </div>
       <div class="column">
@@ -17,15 +17,17 @@
           class="is-flex is-align-items-center is-justify-content-space-between"
         >
           <section>
-            <strong>00:00:00</strong>
+            <strong>
+              {{ tempoDecorrido }}
+            </strong>
           </section>
-          <button class="button">
+          <button class="button" @click="iniciar">
             <span class="icon">
               <i class="fas fa-play"></i>
             </span>
             <span>play</span>
           </button>
-          <button class="button">
+          <button class="button" @click="finalizar">
             <span class="icon">
               <i class="fas fa-stop"></i>
             </span>
@@ -41,6 +43,29 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "FormuLario",
+  name: "FormuLário",
+  data() {
+    return {
+      tempoEmSegundos: 0,
+      cronometro: 0,
+    };
+  },
+  computed: {
+    tempoDecorrido(): string {
+      return new Date(this.tempoEmSegundos * 1000).toISOString().substr(11, 8);
+    },
+  },
+  methods: {
+    iniciar() {
+      // começar a contagem
+      // 1 seg = 1000 ms
+      this.cronometro = setInterval(() => {
+        this.tempoEmSegundos += 1;
+      }, 1000);
+    },
+    finalizar() {
+      clearInterval(this.cronometro);
+    },
+  },
 });
 </script>
