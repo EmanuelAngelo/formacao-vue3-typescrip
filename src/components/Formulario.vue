@@ -13,28 +13,7 @@
         />
       </div>
       <div class="column">
-        <div
-          class="is-flex is-align-items-center is-justify-content-space-between"
-        >
-          <button class="button" @click="iniciar">
-            <span class="icon">
-              <i class="fas fa-play"></i>
-            </span>
-            <span>play</span>
-          </button>
-          <button class="button" @click="pausar">
-            <span class="icon">
-              <i class="fa-solid fa-pause"></i>
-            </span>
-            <span>pausar</span>
-          </button>
-          <button class="button" @click="finalizar">
-            <span class="icon">
-              <i class="fas fa-stop"></i>
-            </span>
-            <span>stop</span>
-          </button>
-        </div>
+        <TemporiZador />
       </div>
     </div>
   </div>
@@ -42,34 +21,9 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-
+import TemporiZador from "./Temporizador.vue";
 export default defineComponent({
   name: "FormuLário",
-  data() {
-    return {
-      tempoEmSegundos: 0,
-      cronometro: 0,
-    };
-  },
-  computed: {
-    tempoDecorrido(): string {
-      return new Date(this.tempoEmSegundos * 1000).toISOString().substr(11, 8);
-    },
-  },
-  methods: {
-    iniciar() {
-      // começar a contagem
-      // 1 seg = 1000 ms
-      this.cronometro = setInterval(() => {
-        this.tempoEmSegundos += 1;
-      }, 1000);
-    },
-    finalizar() {
-      clearInterval(this.cronometro);
-    },
-    pausar() {
-      clearInterval(this.cronometro);
-    },
-  },
+  components: { TemporiZador },
 });
 </script>
