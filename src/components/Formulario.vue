@@ -16,16 +16,17 @@
         <div
           class="is-flex is-align-items-center is-justify-content-space-between"
         >
-          <section>
-            <strong>
-              {{ tempoDecorrido }}
-            </strong>
-          </section>
           <button class="button" @click="iniciar">
             <span class="icon">
               <i class="fas fa-play"></i>
             </span>
             <span>play</span>
+          </button>
+          <button class="button" @click="pausar">
+            <span class="icon">
+              <i class="fa-solid fa-pause"></i>
+            </span>
+            <span>pausar</span>
           </button>
           <button class="button" @click="finalizar">
             <span class="icon">
@@ -64,6 +65,9 @@ export default defineComponent({
       }, 1000);
     },
     finalizar() {
+      clearInterval(this.cronometro);
+    },
+    pausar() {
       clearInterval(this.cronometro);
     },
   },
